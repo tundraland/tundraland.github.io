@@ -1,1 +1,92 @@
-Sponsor Party
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,500,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://use.fontawesome.com/1cda6e8f12.js"></script>
+</head>
+<body>
+  <div class="main-container">
+    <div class="inner">
+      <div class="content">
+        <div class="logo-holder">
+          <img src="images/logo.png" alt="Mile of Music Presented By Tundraland">
+        </div>
+        <div class="official-party">
+          <h2>The Official Mile 6 Sponsor Party</h2>
+        </div>
+        <h1 class="title">Will you be joining us?</h1>
+        <div class="info-row">
+          <div id="partyDetails">
+            <h4>Party Details</h4>
+            <h3 class="underline">Monday, July 30th</h3>
+            <h3 class="small">D2 Sports Pub</h3>
+            <h5>403 W. College Ave.</h5>
+            <h5>Appleton, WI 54911</h5>
+          </div>
+        
+          <div class="form-column">
+              <div id="successMessage"></div>
+              <div id="errorMessage"></div>
+            <div id="rsvpForm">
+              <form action="https://hooks.zapier.com/hooks/catch/3482919/wlha6c/" id="theForm">
+                <div class="form-group">
+                  <label for="companyName">Company Name</label>
+                  <input type="text" id="companyName" name="company" required>
+                </div>
+                <div class="form-group">
+                  <label for="attendees">Number of Attendees</label>
+                  <input type="text" id="attendees" oninput="this.value=this.value.replace(/[^0-9]/g,'');" name="attendees" maxlength="4" required>
+                </div>
+                <div class="button-row">
+                  <button type="submit">Respond</button>
+                </div>
+              </form>
+            </div><!--RSVP FORM-->
+          </div><!--FORM COLUMN-->
+        </div><!--INFO ROW-->
+      </div><!--CONTENT-->
+    </div><!--INNER-->
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/moment.js"></script>
+<script>
+    $(document).ready(function(){
+      $('#successMessage').removeClass('show-success');
+      $('#rsvpForm').removeClass('collapse-form');
+      $('#theForm').submit(function(e) {
+        e.preventDefault();
+  
+        let that = $(this);
+        let company = $('#companyName').val();
+        let attendees = $('#attendees').val();
+        let date = moment().format('L');
+  
+        $.ajax({
+          url: "https://hooks.zapier.com/hooks/catch/3482919/wlha6c/",
+          method: 'POST',
+          data: {
+            date: date,
+            company : company,
+            attendees : attendees
+          },
+          success:function(data) {
+            $('form').trigger('reset');
+            $('#rsvpForm').fadeOut(200);
+            $('#successMessage').fadeIn(600).html('Thank you for responding!').addClass('show-success');
+          },
+          error:function() {
+            $('#errorMessage').html('Whoops! Something went wrong.').addClass('show-error');
+          }
+        })
+      });
+  
+    });
+  </script>
+</html>
