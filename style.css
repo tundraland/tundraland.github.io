@@ -29,9 +29,14 @@ body {
   width: 100%;
 }
 
-h2, h3, h4, h5 {
+h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif;
   text-transform: uppercase;
+}
+
+h6 {
+  font-size: 14.5px;
+  letter-spacing: 0.25px;
 }
 
 h2 {
