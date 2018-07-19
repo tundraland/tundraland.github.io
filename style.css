@@ -41,6 +41,7 @@ h6 {
   margin: 0;
   font-weight: 300;
   font-style: oblique;
+  text-transform: none;
 }
 
 h2 {
@@ -126,6 +127,7 @@ h5 {
 
 #partyDetails {
   width: 40%;
+  padding-left: 30px;
 }
 
 .form-column {
@@ -273,6 +275,8 @@ button:focus {
   #partyDetails {
     width: 100%;
     margin-bottom: 30px;
+    text-align: center;
+    padding: 0;
   }
   .main-container {
     height: 100%;
